@@ -7,9 +7,7 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint",
-		"production": "prisma generate && next build",
-		"vercel-build": "npm run production"
+		"lint": "next lint"
 	},
 	"dependencies": {
 		"@icons-pack/react-simple-icons": "^8.0.1",
