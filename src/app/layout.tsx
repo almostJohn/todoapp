@@ -2,7 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import type { PropsWithChildren } from "react";
 import { Providers } from "./providers";
-import { inter } from "~/util/fonts";
+import { inter } from "@/util/fonts";
 
 export const metadata: Metadata = {
 	title: {

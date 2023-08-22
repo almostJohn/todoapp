@@ -1,20 +1,26 @@
-import { AddTask } from "~/components/AddTask";
-import { TodoList } from "~/components/TodoList";
-import { Nav } from "~/components/nav/Nav";
-import { getAllTodos } from "../../api";
+import { Nav } from "@/components/nav/Nav";
+import { Footer } from "@/components/footer/Footer";
+import { TodoListItem } from "@/components/ui/TodoListItem";
+import { getAllTodo } from "@/functions/todos/getAllTodo";
+import { toggleTodo } from "@/functions/todos/toggleTodo";
 
 export default async function Page() {
-	const tasks = await getAllTodos();
+	const todoLists = await getAllTodo();
 
 	return (
 		<>
 			<Nav />
-			<main className="max-w-4xl mx-auto">
-				<div className="text-center flex flex-col gap-4">
-					<AddTask />
-				</div>
-				<TodoList tasks={tasks} />
-			</main>
+			<div className="container p-10">
+				<h3 className="text-2xl font-light leading-none mb-5">
+					This is your list of <span className="text-sky-500">todo</span>
+				</h3>
+				<ul className="pl-5">
+					{todoLists.map((todo) => (
+						<TodoListItem key={todo.id} {...todo} toggleTodo={toggleTodo} />
+					))}
+				</ul>
+			</div>
+			<Footer />
 		</>
 	);
 }
