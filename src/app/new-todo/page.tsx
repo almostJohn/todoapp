@@ -28,10 +28,10 @@ export default function Page() {
 					<input
 						type="text"
 						name="title"
-						placeholder="Type here"
+						placeholder="Create your todo"
 						className="input input-bordered w-full max-w-full p-3 text-neutral-900 dark:text-neutral-200"
 					/>
-					<div className="flex gap-2 justify-end">
+					<div className="flex justify-end gap-2">
 						<button className="btn btn-ghost mt-4" type="submit">
 							Create
 						</button>

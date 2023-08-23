@@ -1,57 +1,57 @@
 "use client";
 
-import { Trash2, FileEdit } from "lucide-react";
 import { FormEventHandler, useState } from "react";
-import { toggleDelete } from "@/functions/todos/toggleDelete";
-import { updateTodo } from "@/functions/todos/updateTodo";
 import { useRouter } from "next/navigation";
+import { FileEdit, Trash2 } from "lucide-react";
 import { TodoListModal } from "./TodoListModal";
+import { deleteTodo } from "@/functions/todos/deleteTodo";
+import { upsertTodo } from "@/functions/todos/upsertTodo";
 
 type TodoListItemProps = {
 	id: string;
 	title: string;
 	completed: boolean;
-	toggleTodo(id: string, completed: boolean): void | Promise<void>;
+	execute(id: string, completed: boolean): void | Promise<void>;
 };
 
-export function TodoListItem({ id, title, completed, toggleTodo }: TodoListItemProps) {
+export function TodoListItem({ id, title, completed, execute }: TodoListItemProps) {
 	const router = useRouter();
-	const [deleteTask, setDeleteTask] = useState<boolean>(false);
-	const [updateTask, setUpdateTask] = useState<boolean>(false);
-	const [updatedTitle, setUpdatedTitle] = useState<string>(title);
+	const [toDelete, setToDelete] = useState<boolean>(false);
+	const [toUpdate, setToUpdate] = useState<boolean>(false);
+	const [newTitle, setNewTitle] = useState<string>(title);
 
-	const handleDeleteTask = async (id: string) => {
-		await toggleDelete(id);
-		setDeleteTask(false);
+	const handleDelete = async (id: string) => {
+		await deleteTodo(id);
+		setToDelete(false);
 		router.refresh();
 	};
 
-	const handleEditTask: FormEventHandler<HTMLFormElement> = async (e) => {
+	const handleUpdate: FormEventHandler<HTMLFormElement> = async (e) => {
 		e.preventDefault();
-		await updateTodo(id, updatedTitle);
-		setUpdateTask(false);
+		await upsertTodo(id, newTitle);
+		setToUpdate(false);
 		router.refresh();
 	};
 
 	return (
 		<li className="flex gap-5 items-center">
 			<input
-				id={id}
 				type="checkbox"
+				id={id}
 				className="checkbox peer"
 				defaultChecked={completed}
-				onChange={(e) => toggleTodo(id, e.target.checked)}
+				onChange={(e) => execute(id, e.target.checked)}
 			/>
-			<FileEdit onClick={() => setUpdateTask(true)} className="cursor-pointer text-sky-500 hover:text-sky-300" />
-			<TodoListModal isOpen={updateTask} setModalOpen={setUpdateTask}>
-				<form onSubmit={handleEditTask}>
-					<h3 className="text-lg font-bold">Edit todo</h3>
+			<FileEdit onClick={() => setToUpdate(true)} className="cursor-pointer text-sky-500 hover:text-sky-300" />
+			<TodoListModal isOpen={toUpdate} execute={setToUpdate}>
+				<form onSubmit={handleUpdate}>
+					<h3 className="text-lg">Edit todo</h3>
 					<div className="modal-action">
 						<input
 							type="text"
-							value={updatedTitle}
-							onChange={(e) => setUpdatedTitle(e.target.value)}
-							placeholder="Type here"
+							value={newTitle}
+							onChange={(e) => setNewTitle(e.target.value)}
+							placeholder="Your new todo"
 							className="input input-bordered w-full max-w-full"
 						/>
 						<button className="btn btn-ghost" type="submit">
@@ -60,15 +60,15 @@ export function TodoListItem({ id, title, completed, toggleTodo }: TodoListItemP
 					</div>
 				</form>
 			</TodoListModal>
-			<Trash2 onClick={() => setDeleteTask(true)} className="cursor-pointer text-red-500 hover:text-red-300" />
-			<TodoListModal isOpen={deleteTask} setModalOpen={setDeleteTask}>
+			<Trash2 onClick={() => setToDelete(true)} className="cursor-pointer text-red-500 hover:text-red-300" />
+			<TodoListModal isOpen={toDelete} execute={setToDelete}>
 				<h3 className="text-lg">
 					Do you really want to delete this todo?
 					<br />
 					<span className="text-red-500">This action is irreversible!</span>
 				</h3>
 				<div className="modal-action">
-					<button onClick={() => handleDeleteTask(id)} className="btn btn-error">
+					<button onClick={() => handleDelete(id)} className="btn btn-error">
 						Delete
 					</button>
 				</div>

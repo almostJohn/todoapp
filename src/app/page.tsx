@@ -1,11 +1,11 @@
 import { Nav } from "@/components/nav/Nav";
 import { Footer } from "@/components/footer/Footer";
-import { TodoListItem } from "@/components/ui/TodoListItem";
-import { getAllTodo } from "@/functions/todos/getAllTodo";
+import { getTodos } from "@/functions/todos/getTodos";
 import { toggleTodo } from "@/functions/todos/toggleTodo";
+import { TodoListItem } from "@/components/ui/TodoListItem";
 
 export default async function Page() {
-	const todoLists = await getAllTodo();
+	const todoLists = await getTodos();
 
 	return (
 		<>
@@ -16,7 +16,7 @@ export default async function Page() {
 				</h3>
 				<ul className="pl-5">
 					{todoLists.map((todo) => (
-						<TodoListItem key={todo.id} {...todo} toggleTodo={toggleTodo} />
+						<TodoListItem key={todo.id} {...todo} execute={toggleTodo} />
 					))}
 				</ul>
 			</div>
