@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
-import type { PropsWithChildren } from "react";
-import { Providers } from "./providers";
-import { inter, jetBrainsMono } from "@/util/fonts";
+"use client";
 
-import "../styles/globals.css";
+import type { Metadata } from "next";
+import { Providers } from "./providers";
+import { inter } from "@/util/fonts";
+
 import "../styles/custom.css";
+import "../styles/globals.css";
 
 export const metadata: Metadata = {
 	title: {
@@ -40,12 +41,19 @@ export const metadata: Metadata = {
 	},
 };
 
-export default function RootLayout({ children }: PropsWithChildren) {
+export default function GlobalError({ error }: { error: Error }) {
+	console.error(error);
+
 	return (
-		<html className={`${inter.variable} ${jetBrainsMono.variable}`} lang="en" suppressHydrationWarning>
+		<html className={inter.variable} lang="en" suppressHydrationWarning>
 			<body className="bg-neutral-100 antialiased dark:bg-neutral-900 dark:text-neutral-200">
 				<Providers>
-					<div className="min-h-screen">{children}</div>
+					<main className="mx-auto max-w-2xl min-h-screen">
+						<div className="mx-auto max-w-lg min-h-screen flex flex-col place-content-center place-items-center gap-8 px-8 py-16 lg:px-6 lg:py-0">
+							<h1 className="text-[16rem] font-black leading-none md:text-[12rem]">500</h1>
+							<h2 className="text-[6rem] md:text-[3rem]">Error.</h2>
+						</div>
+					</main>
 				</Providers>
 			</body>
 		</html>

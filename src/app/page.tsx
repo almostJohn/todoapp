@@ -1,24 +1,16 @@
-import { Nav } from "@/components/nav/Nav";
+import { ListItem } from "@/components/list/ListItem";
 import { Footer } from "@/components/footer/Footer";
-import { getTodos } from "@/functions/todos/getTodos";
-import { toggleTodo } from "@/functions/todos/toggleTodo";
-import { TodoListItem } from "@/components/ui/TodoListItem";
 
 export default async function Page() {
-	const todoLists = await getTodos();
-
 	return (
 		<>
-			<Nav />
-			<div className="container p-10">
-				<h3 className="text-2xl font-light leading-none mb-5">
-					This is your list of <span className="text-sky-500">todo</span>
-				</h3>
-				<ul className="pl-5">
-					{todoLists.map((todo) => (
-						<TodoListItem key={todo.id} {...todo} execute={toggleTodo} />
-					))}
-				</ul>
+			<div className="flex justify-center items-center min-h-screen">
+				<div className="relative w-[450px] h-[550px] px-[30px] bg-transparent">
+					<h1 className="text-3xl w-full font-bold leading-tight text-center mb-[15px] cursor-pointer">
+						todoapp<span className="text-sky-500">.gg</span>
+					</h1>
+					<ListItem />
+				</div>
 			</div>
 			<Footer />
 		</>
