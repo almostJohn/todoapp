@@ -51,7 +51,7 @@ export default function GlobalError({ error }: { error: Error }) {
 					<main className="mx-auto max-w-2xl min-h-screen">
 						<div className="flex flex-col justify-center items-center h-[100vh]">
 							<h1 className="text-[6em] m-0">500</h1>
-							<p className="text-[1.5em] m-0 mt-[20px] mb-5">Error.</p>
+							<p className="text-[1.5em] text-center m-0 mt-[20px] mb-5">Error.</p>
 						</div>
 					</main>
 				</Providers>
