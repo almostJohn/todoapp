@@ -65,7 +65,7 @@ export function ListItem() {
 								onClick={() => removeItem(index)}
 								className="absolute flex items-center justify-center w-[30px] h-[30px] right-[-40px]"
 							>
-								<Trash2 className="hover:text-red-500" />
+								<Trash2 className="text-red-500 hover:text-red-600" />
 							</i>
 						</li>
 					))}

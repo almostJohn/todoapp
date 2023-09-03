@@ -3,9 +3,9 @@ import { buttonVariants } from "@/components/ui/Button";
 
 export default function NotFound() {
 	return (
-		<div className="mx-auto max-w-lg min-h-screen flex flex-col place-content-center place-items-center gap-8 pb-6 ">
-			<h1 className="text-[16rem] font-black leading-none md:text-[12rem]">404</h1>
-			<h2 className="text-[6rem] md:text-[3rem]">Not found.</h2>
+		<div className="flex flex-col justify-center items-center h-[100vh]">
+			<h1 className="text-[6em] m-0">404</h1>
+			<p className="text-[1.5em] m-0 mt-[20px] mb-5">You&apos;ve lost track! page not found</p>
 			<Link className={buttonVariants({ variant: "default" })} href="/">
 				Take me back
 			</Link>

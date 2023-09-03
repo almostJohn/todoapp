@@ -49,9 +49,9 @@ export default function GlobalError({ error }: { error: Error }) {
 			<body className="bg-neutral-100 antialiased dark:bg-neutral-900 dark:text-neutral-200">
 				<Providers>
 					<main className="mx-auto max-w-2xl min-h-screen">
-						<div className="mx-auto max-w-lg min-h-screen flex flex-col place-content-center place-items-center gap-8 px-8 py-16 lg:px-6 lg:py-0">
-							<h1 className="text-[16rem] font-black leading-none md:text-[12rem]">500</h1>
-							<h2 className="text-[6rem] md:text-[3rem]">Error.</h2>
+						<div className="flex flex-col justify-center items-center h-[100vh]">
+							<h1 className="text-[6em] m-0">500</h1>
+							<p className="text-[1.5em] m-0 mt-[20px] mb-5">Error.</p>
 						</div>
 					</main>
 				</Providers>
