@@ -1,4 +1,4 @@
-import { SiGithub, SiTwitter, SiInstagram, SiFacebook, SiDiscord } from "@icons-pack/react-simple-icons";
+import { SiGithub, SiX, SiInstagram, SiFacebook, SiDiscord } from "@icons-pack/react-simple-icons";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -33,7 +33,7 @@ export function Footer() {
 							rel="external noopener noreferrer"
 							target="_blank"
 						>
-							<SiTwitter />
+							<SiX />
 						</Link>
 					</div>
 					<div className="tooltip tooltip-bottom" data-tip="Instagram">

@@ -41,7 +41,7 @@ export function TodoItem() {
 	return (
 		<>
 			<input
-				id="input-id"
+				id={nanoid()}
 				type="text"
 				placeholder="Write your todo..."
 				className="relative input input-bordered w-full max-w-full"
