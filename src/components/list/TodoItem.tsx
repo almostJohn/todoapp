@@ -4,6 +4,8 @@ import { useState, KeyboardEvent } from "react";
 import { nanoid } from "nanoid";
 import type { Todo } from "@/types/Todo";
 import { LucideTrash2 } from "lucide-react";
+import { Input } from "../ui/input";
+import { buttonVariants } from "../ui/Button";
 
 export function TodoItem() {
 	const [items, setItems] = useState<Todo[]>([]);
@@ -40,35 +42,30 @@ export function TodoItem() {
 
 	return (
 		<>
-			<input
-				id={nanoid()}
-				type="text"
-				placeholder="Write your todo..."
-				className="relative input input-bordered w-full max-w-full"
-				onKeyUp={handleKeyUp}
-			/>
-			<ul className="relative mt-[10px] h-[350px] overflow-y-auto pr-[10px]">
-				<div className="w-custom">
-					{items.map((item, _) => (
-						<li
-							key={item.id}
-							className={
-								item.isDone
-									? "relative flex items-center p-[10px] min-h-[45px] cursor-pointer line-through text-slate-500"
-									: "relative flex items-center p-[10px] min-h-[45px] cursor-pointer"
-							}
-							onClick={() => toggleLineThrough(item.id)}
+			<Input type="text" placeholder="Write your todo..." onKeyUp={handleKeyUp} />
+			<ul className="space-y-4 py-4">
+				{items.map((item) => (
+					<li
+						key={item.id}
+						className={
+							item.isDone
+								? "relative flex items-center p-[10px] min-h-[45px] cursor-pointer line-through text-muted-foreground"
+								: "relative flex items-center p-[10px] min-h-[45px] cursor-pointer"
+						}
+						onClick={() => toggleLineThrough(item.id)}
+					>
+						{item.text}
+						<button
+							className={buttonVariants({
+								variant: "default",
+								className: "absolute flex items-center justify-center w-[30px] h-[30px] right-[-5px]",
+							})}
+							onClick={() => removeTodo(item.id)}
 						>
-							{item.text}
-							<i
-								className="absolute flex items-center justify-center w-[30px] h-[30px] right-[-40px]"
-								onClick={() => removeTodo(item.id)}
-							>
-								<LucideTrash2 className="text-red-700 hover:text-red-500" />
-							</i>
-						</li>
-					))}
-				</div>
+							<LucideTrash2 className="text-red-500" />
+						</button>
+					</li>
+				))}
 			</ul>
 		</>
 	);

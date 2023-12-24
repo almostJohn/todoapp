@@ -1,6 +1,6 @@
 "use client";
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Providers } from "./providers";
 import { inter } from "@/util/fonts";
 
@@ -11,11 +11,6 @@ export const metadata: Metadata = {
 	title: {
 		default: "todoapp.gg",
 		template: "% | todoapp.gg",
-	},
-	viewport: {
-		minimumScale: 1,
-		initialScale: 1,
-		width: "device-width",
 	},
 	icons: {
 		other: [
@@ -31,14 +26,14 @@ export const metadata: Metadata = {
 			},
 		],
 	},
+};
+
+export const viewport: Viewport = {
 	themeColor: [
 		{ media: "(prefers-color-scheme: light)", color: "#f5f5f5" },
 		{ media: "(prefers-color-scheme: dark)", color: "#171717" },
 	],
 	colorScheme: "light dark",
-	other: {
-		"msapplication-TileColor": "#171717",
-	},
 };
 
 export default function GlobalError({ error }: { error: Error }) {
